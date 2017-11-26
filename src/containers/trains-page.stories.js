@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import TrainsPage from './trains-page';
 import store from '../store';
 
-storiesOf('TrainsPage', module).add('TrainsPage', () => (
+storiesOf('TrainsPage Container', module).add('TrainsPage', () => (
   <Provider store={store}>
     <TrainsPage />
   </Provider>

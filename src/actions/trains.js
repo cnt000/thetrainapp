@@ -1,8 +1,11 @@
 import { LOAD_TRAINS_REQUEST } from '../types/trains';
 
-const getTrains = action => ({
+export const getTrains = action => ({
   type: LOAD_TRAINS_REQUEST,
   action
 });
 
-export default getTrains;
+export const getTrainsDetails = action => ({
+  type: 'LOAD_TRAIN_DETAILS_REQUEST',
+  action
+});

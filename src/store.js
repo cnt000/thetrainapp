@@ -20,8 +20,19 @@ function* loadTrainsList(url) {
   }
 }
 
+function* loadTrainDetails(url) {
+  try {
+    const details = yield call(trainsApi, url);
+    yield put({ type: 'LOAD_TRAIN_DETAILS_SUCCESS', details });
+  } catch (error) {
+    yield put({ type: 'LOAD_TRAIN_DETAILS_FAIL', error });
+    throw error;
+  }
+}
+
 function* watchRequest() {
   yield takeLatest(LOAD_TRAINS_REQUEST, loadTrainsList);
+  yield takeLatest('LOAD_TRAIN_DETAILS_REQUEST', loadTrainDetails);
 }
 
 const reducer = combineReducers({

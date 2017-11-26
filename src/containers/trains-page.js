@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import getTrains from '../actions/trains';
+import { getTrains, getTrainsDetails } from '../actions/trains';
 import Train from '../components/train';
 
 const apiUrl = `http://localhost:3000/proxy?url=https://realtime.thetrainline.com/departures/wat`;
@@ -21,7 +21,9 @@ class Trains extends React.Component {
               <ul>
                 {trains.map(
                   train =>
-                    train.transportMode === 'TRAIN' && <Train data={train} />
+                    train.transportMode === 'TRAIN' && (
+                      <Train data={train} onClick={this.props.handleClick} />
+                    )
                 )}
               </ul>
             }
@@ -36,12 +38,16 @@ class Trains extends React.Component {
 
 Trains.propTypes = {
   trains: PropTypes.arrayOf.isRequired,
-  getTrainsList: PropTypes.func.isRequired
+  getTrainsList: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({ trains: state.trainsReducer.services });
 
 const mapDispatchToProps = dispatch => ({
+  handleClick: url => {
+    dispatch(getTrainsDetails(url));
+  },
   getTrainsList: url => {
     dispatch(getTrains(url));
   }
