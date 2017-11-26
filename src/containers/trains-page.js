@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import getTrains from '../actions/trains';
+import Train from '../components/train';
 
 const apiUrl = `http://localhost:3000/proxy?url=https://realtime.thetrainline.com/departures/wat`;
 
@@ -16,16 +17,12 @@ class Trains extends React.Component {
       <div>
         {trains ? (
           <div>
-            <h1> Trains List </h1>
             {
               <ul>
-                {trains.map(train => (
-                  <li key={train.serviceIdentifier}>
-                    ID: {train.serviceIdentifier} - Operator:{' '}
-                    {train.serviceOperator} mode: {train.transportMode} -
-                    Calling Type: {train.callingType}
-                  </li>
-                ))}
+                {trains.map(
+                  train =>
+                    train.transportMode === 'TRAIN' && <Train data={train} />
+                )}
               </ul>
             }
           </div>
