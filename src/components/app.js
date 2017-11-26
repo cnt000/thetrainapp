@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import StopsList from './stops-list';
+import TrainsPage from '../containers/trains-page';
 
-const App = () => <StopsList />;
+const App = () => <TrainsPage />;
 
 export default connect(state => state)(App);
