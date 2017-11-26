@@ -5,7 +5,7 @@ const trainsReducer = (state = {}, action) => {
     case LOAD_TRAINS_SUCCESS:
       return { ...state, services: action.trains.services };
     case 'LOAD_TRAIN_DETAILS_SUCCESS':
-      return { ...state, activeTrain: action };
+      return { ...state, activeTrain: action.details };
     default:
       return state;
   }
