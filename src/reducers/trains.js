@@ -1,11 +1,14 @@
-import { LOAD_TRAINS_SUCCESS } from '../types/trains';
+import {
+  LOAD_TRAINS_SUCCESS,
+  LOAD_TRAIN_DETAILS_SUCCESS
+} from '../types/trains';
 
 const trainsReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD_TRAINS_SUCCESS:
       return { ...state, services: action.trains.services };
-    case 'LOAD_TRAIN_DETAILS_SUCCESS':
-      return { ...state, activeTrain: action.details };
+    case LOAD_TRAIN_DETAILS_SUCCESS:
+      return { ...state, activeTrain: action.details.service };
     default:
       return state;
   }

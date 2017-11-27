@@ -12,25 +12,31 @@ class Trains extends React.Component {
   }
 
   render() {
-    const { trains } = this.props;
+    const { trains, activeTrain } = this.props;
     return (
       <div>
-        {trains ? (
-          <div>
-            {
-              <ul>
-                {trains.map(
-                  train =>
-                    train.transportMode === 'TRAIN' && (
-                      <Train data={train} onClick={this.props.handleClick} />
-                    )
-                )}
-              </ul>
-            }
-          </div>
-        ) : (
-          '...loading'
-        )}
+        DETAILS: {activeTrain && activeTrain.serviceUid}
+        {!activeTrain &&
+          (trains ? (
+            <div>
+              {
+                <ul>
+                  {trains.map(
+                    train =>
+                      train.transportMode === 'TRAIN' && (
+                        <Train
+                          key={train.serviceIdentifier}
+                          data={train}
+                          onClick={this.props.handleClick}
+                        />
+                      )
+                  )}
+                </ul>
+              }
+            </div>
+          ) : (
+            '...loading'
+          ))}
       </div>
     );
   }
@@ -38,11 +44,15 @@ class Trains extends React.Component {
 
 Trains.propTypes = {
   trains: PropTypes.arrayOf.isRequired,
+  activeTrain: PropTypes.objectOf.isRequired,
   getTrainsList: PropTypes.func.isRequired,
   handleClick: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({ trains: state.trainsReducer.services });
+const mapStateToProps = state => ({
+  trains: state.trainsReducer.services,
+  activeTrain: state.trainsReducer.activeTrain
+});
 
 const mapDispatchToProps = dispatch => ({
   handleClick: url => {
