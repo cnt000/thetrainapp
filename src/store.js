@@ -1,49 +1,15 @@
-import 'regenerator-runtime/runtime';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-saga';
-import { put, call, takeLatest } from 'redux-saga/effects';
+import { createEpicMiddleware, combineEpics } from 'redux-observable';
 import trainsReducer from './reducers/trains';
-import trainsApi from './services/trainsApi';
-import {
-  LOAD_TRAINS_REQUEST,
-  LOAD_TRAINS_SUCCESS,
-  LOAD_TRAINS_FAIL,
-  LOAD_TRAIN_DETAILS_REQUEST,
-  LOAD_TRAIN_DETAILS_SUCCESS,
-  LOAD_TRAIN_DETAILS_FAIL
-} from './types/trains';
+import { loadTrainsList, loadTrainDetails } from './epics/trains';
 
-function* loadTrainsList(url) {
-  try {
-    const trains = yield call(trainsApi, url);
-    yield put({ type: LOAD_TRAINS_SUCCESS, trains });
-  } catch (error) {
-    yield put({ type: LOAD_TRAINS_FAIL, error });
-    throw error;
-  }
-}
-
-function* loadTrainDetails(url) {
-  try {
-    const details = yield call(trainsApi, url);
-    yield put({ type: LOAD_TRAIN_DETAILS_SUCCESS, details });
-  } catch (error) {
-    yield put({ type: LOAD_TRAIN_DETAILS_FAIL, error });
-    throw error;
-  }
-}
-
-function* watchRequest() {
-  yield takeLatest(LOAD_TRAINS_REQUEST, loadTrainsList);
-  yield takeLatest(LOAD_TRAIN_DETAILS_REQUEST, loadTrainDetails);
-}
+const rootEpic = combineEpics(loadTrainsList, loadTrainDetails);
 
 const reducer = combineReducers({
   trainsReducer
 });
 
-const sagaMiddleware = createSagaMiddleware();
-const store = createStore(reducer, applyMiddleware(sagaMiddleware));
-sagaMiddleware.run(watchRequest);
+const epicMiddleware = createEpicMiddleware(rootEpic);
+const store = createStore(reducer, applyMiddleware(epicMiddleware));
 
 export default store;
