@@ -1,5 +1,8 @@
+import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
-import trainsApi from '../services/trainsApi';
+import 'rxjs/add/operator/map';
+import 'rxjs';
+import { ajax } from 'rxjs/observable/dom/ajax';
 import {
   fetchTrainsFulfilled,
   fetchTrainDetailsFulfilled
@@ -9,16 +12,20 @@ import {
   LOAD_TRAIN_DETAILS_REQUEST
 } from '../types/trains';
 
-export const loadTrainsList = action$ =>
-  action$
+export function loadTrainsList(action$) {
+  return action$
     .ofType(LOAD_TRAINS_REQUEST)
-    .mergeMap(action =>
-      trainsApi(action).then(response => fetchTrainsFulfilled(response))
+    .map(action => action)
+    .switchMap(payload =>
+      ajax.getJSON(`${payload.action}`).map(fetchTrainsFulfilled)
     );
+}
 
-export const loadTrainDetails = action$ =>
-  action$
+export function loadTrainDetails(action$) {
+  return action$
     .ofType(LOAD_TRAIN_DETAILS_REQUEST)
-    .mergeMap(action =>
-      trainsApi(action).then(response => fetchTrainDetailsFulfilled(response))
+    .map(action => action)
+    .switchMap(payload =>
+      ajax.getJSON(`${payload.action}`).map(fetchTrainDetailsFulfilled)
     );
+}

@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 import { getTrains, getTrainsDetails } from '../actions/trains';
 import Train from '../components/train';
 
-const apiUrl = `http://localhost:3000/proxy?url=https://realtime.thetrainline.com/departures/wat`;
+const proxyUrl = `http://localhost:3000/proxy?url=`;
+const trainsUrl = `https://realtime.thetrainline.com/departures/wat`;
 
 class Trains extends React.Component {
   componentDidMount() {
-    this.props.getTrainsList(apiUrl);
+    this.props.getTrainsList(`${proxyUrl}${trainsUrl}`);
   }
 
   render() {
@@ -25,7 +26,9 @@ class Trains extends React.Component {
                     train =>
                       train.transportMode === 'TRAIN' && (
                         <Train
-                          key={train.serviceIdentifier}
+                          key={`${train.serviceIdentifier}${
+                            train.destinationList[0].crs
+                          }`}
                           data={train}
                           onClick={this.props.handleClick}
                         />
@@ -42,9 +45,14 @@ class Trains extends React.Component {
   }
 }
 
+Trains.defaultProps = {
+  activeTrain: undefined,
+  trains: []
+};
+
 Trains.propTypes = {
-  trains: PropTypes.arrayOf.isRequired,
-  activeTrain: PropTypes.objectOf.isRequired,
+  trains: PropTypes.arrayOf(PropTypes.object),
+  activeTrain: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   getTrainsList: PropTypes.func.isRequired,
   handleClick: PropTypes.func.isRequired
 };
@@ -56,7 +64,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   handleClick: url => {
-    dispatch(getTrainsDetails(url));
+    dispatch(getTrainsDetails(`${proxyUrl}${url}`));
   },
   getTrainsList: url => {
     dispatch(getTrains(url));

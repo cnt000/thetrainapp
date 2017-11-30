@@ -12,8 +12,12 @@ const Train = ({ data, onClick }) => (
 );
 
 Train.propTypes = {
-  data: PropTypes.objectOf.isRequired,
+  data: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   onClick: PropTypes.func.isRequired
+};
+
+Train.defaultProps = {
+  data: {}
 };
 
 export default connect(state => state)(Train);
