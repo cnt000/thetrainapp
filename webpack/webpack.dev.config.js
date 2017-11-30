@@ -4,6 +4,7 @@ const parentDir = path.join(__dirname, '../');
 
 module.exports = {
   entry: [path.join(parentDir, 'index.js')],
+  devtool: 'source-map',
   module: {
     loaders: [
       {

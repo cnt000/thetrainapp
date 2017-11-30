@@ -13,29 +13,29 @@ class Trains extends React.Component {
   }
 
   render() {
-    const { trains, activeTrain } = this.props;
+    const { trains, activeTrain, error } = this.props;
     return (
       <div>
-        DETAILS: {activeTrain && activeTrain.serviceUid}
+        <div>{error}</div>
+        {activeTrain && `RESULT: ${activeTrain.serviceUid}`}
         {!activeTrain &&
           (trains ? (
             <div>
-              {
-                <ul>
-                  {trains.map(
-                    train =>
-                      train.transportMode === 'TRAIN' && (
-                        <Train
-                          key={`${train.serviceIdentifier}${
-                            train.destinationList[0].crs
-                          }`}
-                          data={train}
-                          onClick={this.props.handleClick}
-                        />
-                      )
-                  )}
-                </ul>
-              }
+              <span>{trains.length === 0 ? 'no results' : ''}</span>
+              <ul>
+                {trains.map(
+                  train =>
+                    train.transportMode === 'TRAIN' && (
+                      <Train
+                        key={`${train.serviceIdentifier}${
+                          train.destinationList[0].crs
+                        }`}
+                        data={train}
+                        onClick={this.props.handleClick}
+                      />
+                    )
+                )}
+              </ul>
             </div>
           ) : (
             '...loading'
@@ -47,19 +47,22 @@ class Trains extends React.Component {
 
 Trains.defaultProps = {
   activeTrain: undefined,
-  trains: []
+  trains: [],
+  error: ''
 };
 
 Trains.propTypes = {
   trains: PropTypes.arrayOf(PropTypes.object),
   activeTrain: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   getTrainsList: PropTypes.func.isRequired,
-  handleClick: PropTypes.func.isRequired
+  handleClick: PropTypes.func.isRequired,
+  error: PropTypes.string
 };
 
 const mapStateToProps = state => ({
   trains: state.trainsReducer.services,
-  activeTrain: state.trainsReducer.activeTrain
+  activeTrain: state.trainsReducer.activeTrain,
+  error: state.error
 });
 
 const mapDispatchToProps = dispatch => ({

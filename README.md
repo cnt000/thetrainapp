@@ -7,5 +7,3 @@ react router
 styled component 
 
 normalize css
-
-source maps
