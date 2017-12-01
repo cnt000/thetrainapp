@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { getTrains, getTrainsDetails } from '../actions/trains';
 import Train from '../components/train';
 
@@ -13,47 +14,51 @@ class Trains extends React.Component {
   }
 
   render() {
-    const { trains, activeTrain, error } = this.props;
+    const { trains, error } = this.props;
+    const dateTime = new Date();
+    const today = `${dateTime.getFullYear()}-${dateTime.getMonth() + 1}-${(
+      '0' + dateTime.getDate()
+    ).slice(-2)}`;
     return (
       <div>
+        <Link to="/" href="/">
+          Home
+        </Link>
         <div>{error}</div>
-        {activeTrain && `RESULT: ${activeTrain.serviceUid}`}
-        {!activeTrain &&
-          (trains ? (
-            <div>
-              <span>{trains.length === 0 ? 'no results' : ''}</span>
-              <ul>
-                {trains.map(
-                  train =>
-                    train.transportMode === 'TRAIN' && (
-                      <Train
-                        key={`${train.serviceIdentifier}${
-                          train.destinationList[0].crs
-                        }`}
-                        data={train}
-                        onClick={this.props.handleClick}
-                      />
-                    )
-                )}
-              </ul>
-            </div>
-          ) : (
-            '...loading'
-          ))}
+        {trains ? (
+          <div>
+            <span>{trains.length === 0 ? 'no results' : ''}</span>
+            <ul>
+              {trains
+                .filter(train => train.transportMode === 'TRAIN')
+                .map(train => (
+                  <Link
+                    to={`/train/${train.serviceIdentifier}/${today}`}
+                    href="/"
+                    key={`${train.serviceIdentifier}${
+                      train.destinationList[0].crs
+                    }`}
+                  >
+                    <Train data={train} onClick={this.props.handleClick} />
+                  </Link>
+                ))}
+            </ul>
+          </div>
+        ) : (
+          '...loading'
+        )}
       </div>
     );
   }
 }
 
 Trains.defaultProps = {
-  activeTrain: undefined,
   trains: [],
   error: ''
 };
 
 Trains.propTypes = {
   trains: PropTypes.arrayOf(PropTypes.object),
-  activeTrain: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   getTrainsList: PropTypes.func.isRequired,
   handleClick: PropTypes.func.isRequired,
   error: PropTypes.string
@@ -61,7 +66,6 @@ Trains.propTypes = {
 
 const mapStateToProps = state => ({
   trains: state.trainsReducer.services,
-  activeTrain: state.trainsReducer.activeTrain,
   error: state.error
 });
 

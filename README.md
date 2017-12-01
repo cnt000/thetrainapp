@@ -1,7 +1,7 @@
 # The Train App Exercise
 
-react router
+test
+socket
 
 styled component 
-
 normalize css
