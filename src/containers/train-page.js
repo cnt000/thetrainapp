@@ -59,13 +59,15 @@ const mapDispatchToProps = dispatch => ({
 TrainStops.propTypes = {
   activeTrain: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   getTrainsDetails: PropTypes.func,
-  error: PropTypes.string
+  error: PropTypes.string,
+  match: PropTypes.objectOf(PropTypes.string)
 };
 
 TrainStops.defaultProps = {
   activeTrain: {},
   getTrainsDetails: () => {},
-  error: ''
+  error: '',
+  match: { params: PropTypes.string }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrainStops);

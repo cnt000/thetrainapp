@@ -16,9 +16,11 @@ class Trains extends React.Component {
   render() {
     const { trains, error } = this.props;
     const dateTime = new Date();
-    const today = `${dateTime.getFullYear()}-${dateTime.getMonth() + 1}-${(
-      '0' + dateTime.getDate()
-    ).slice(-2)}`;
+    const year = dateTime.getFullYear();
+    const month = dateTime.getMonth() + 1;
+    const dayLeftPadded = `0${dateTime.getDate()}`;
+    const day = `${dayLeftPadded.slice(-2)}`;
+    const today = `${year}-${month}-${day}`;
     return (
       <div>
         <Link to="/" href="/">
