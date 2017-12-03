@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import shortid from 'short-id';
+import format from 'date-fns/format';
 import { getTrainsDetails } from '../actions/trains';
 
 const proxyUrl = `http://localhost:3000/proxy?url=`;
@@ -22,21 +24,30 @@ class TrainStops extends React.Component {
     const { activeTrain, error } = this.props;
     return (
       <nav>
-        <div>{error}</div>
-        <div>
-          <Link to="/" href="/">
-            Back
-          </Link>
-        </div>
+        <Link to="/" href="/">
+          Back
+        </Link>
+        {error && <div>ERROR: {error}</div>}
         <div>{activeTrain.serviceUid}</div>
         <ul>
           {activeTrain.stops &&
             activeTrain.stops.map(
               stop =>
                 stop.departure.scheduled && (
-                  <li key={stop.departure.scheduled.scheduledTime}>
-                    {stop.departure.scheduled &&
-                      stop.departure.scheduled.scheduledTime}
+                  <li
+                    key={`stops_${shortid.generate()}`}
+                    className="calling-point"
+                  >
+                    <div className="calling-point-time">
+                      {stop.departure.scheduled &&
+                        format(stop.departure.scheduled.scheduledTime, 'HH:mm')}
+                    </div>
+                    <div className="calling-point-station-container">
+                      <div className="calling-point-station">
+                        Stoke-on-Trent
+                      </div>
+                      <div className="calling-point-due">?On time</div>
+                    </div>
                   </li>
                 )
             )}

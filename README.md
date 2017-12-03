@@ -1,7 +1,7 @@
 # The Train App Exercise
 
 test
-socket
-
+loader
+icona
 styled component 
-normalize css
+calcolo se ontime?

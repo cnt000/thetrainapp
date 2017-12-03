@@ -14,11 +14,14 @@
   "author": "Edoardo Gargano",
   "license": "ISC",
   "dependencies": {
+    "@storybook/addon-actions": "^3.2.17",
     "@storybook/react": "^3.2.16",
+    "date-fns": "^1.29.0",
     "eslint-loader": "^1.9.0",
     "express": "^4.16.2",
     "express-api-proxy": "^1.0.4",
     "node-sass": "^4.7.2",
+    "normalize-css": "^2.3.1",
     "prop-types": "^15.6.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
@@ -27,6 +30,7 @@
     "redux": "^3.7.2",
     "redux-observable": "^0.17.0",
     "rxjs": "^5.5.2",
+    "short-id": "0.1.0-1",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.4"
   },

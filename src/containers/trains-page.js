@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import format from 'date-fns/format';
+import shortid from 'short-id';
 import { getTrains, getTrainsDetails } from '../actions/trains';
 import Train from '../components/train';
 
@@ -13,42 +14,32 @@ class Trains extends React.Component {
     this.props.getTrainsList(`${proxyUrl}${trainsUrl}`);
   }
 
+  getToday() {
+    this.today = format(new Date(), 'YYYY-MM-DD');
+    return this.today;
+  }
+
   render() {
     const { trains, error } = this.props;
-    const dateTime = new Date();
-    const year = dateTime.getFullYear();
-    const month = dateTime.getMonth() + 1;
-    const dayLeftPadded = `0${dateTime.getDate()}`;
-    const day = `${dayLeftPadded.slice(-2)}`;
-    const today = `${year}-${month}-${day}`;
     return (
       <div>
-        <Link to="/" href="/">
-          Home
-        </Link>
-        <div>{error}</div>
-        {trains ? (
-          <div>
-            <span>{trains.length === 0 ? 'no results' : ''}</span>
-            <ul>
-              {trains
-                .filter(train => train.transportMode === 'TRAIN')
-                .map(train => (
-                  <Link
-                    to={`/train/${train.serviceIdentifier}/${today}`}
-                    href="/"
-                    key={`${train.serviceIdentifier}${
-                      train.destinationList[0].crs
-                    }`}
-                  >
-                    <Train data={train} onClick={this.props.handleClick} />
-                  </Link>
-                ))}
-            </ul>
-          </div>
-        ) : (
-          '...loading'
-        )}
+        {error && <span className="error">Error: {error}</span>}
+        {trains &&
+          trains.length === 0 && (
+            <span className="no-results">No results, please try again...</span>
+          )}
+        <ul>
+          {trains
+            .filter(train => train.transportMode === 'TRAIN')
+            .map(train => (
+              <Train
+                key={`train_${shortid.generate()}`}
+                data={train}
+                day={this.getToday()}
+                onClick={this.props.handleClick}
+              />
+            ))}
+        </ul>
       </div>
     );
   }
