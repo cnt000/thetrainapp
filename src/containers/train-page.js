@@ -21,16 +21,18 @@ class TrainStops extends React.Component {
   }
 
   render() {
-    const { activeTrain, error } = this.props;
+    const { activeTrain, error, loading } = this.props;
     return (
       <nav>
         <Link to="/" href="/">
           Back
         </Link>
         {error && <div>ERROR: {error}</div>}
-        <div>{activeTrain.serviceUid}</div>
+        {loading && <p> Is loading... </p>}
+        {!loading && <p>{activeTrain.serviceUid}</p>}
         <ul>
-          {activeTrain.stops &&
+          {!loading &&
+            activeTrain.stops &&
             activeTrain.stops.map(
               stop =>
                 stop.departure.scheduled && (
@@ -58,7 +60,8 @@ class TrainStops extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  activeTrain: state.trainsReducer.activeTrain
+  activeTrain: state.trainsReducer.activeTrain,
+  loading: state.trainsReducer.loading
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -71,14 +74,16 @@ TrainStops.propTypes = {
   activeTrain: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   getTrainsDetails: PropTypes.func,
   error: PropTypes.string,
-  match: PropTypes.objectOf(PropTypes.string)
+  match: PropTypes.objectOf(PropTypes.string),
+  loading: PropTypes.bool
 };
 
 TrainStops.defaultProps = {
   activeTrain: {},
   getTrainsDetails: () => {},
   error: '',
-  match: { params: PropTypes.string }
+  match: { params: PropTypes.string },
+  loading: false
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrainStops);

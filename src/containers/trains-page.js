@@ -20,11 +20,12 @@ class Trains extends React.Component {
   }
 
   render() {
-    const { trains, error } = this.props;
+    const { trains, error, loading } = this.props;
     return (
       <div>
         {error && <span className="error">Error: {error}</span>}
-        {trains &&
+        <p>{loading && <span> Is loading... </span>}</p>
+        {!loading &&
           trains.length === 0 && (
             <span className="no-results">No results, please try again...</span>
           )}
@@ -47,19 +48,22 @@ class Trains extends React.Component {
 
 Trains.defaultProps = {
   trains: [],
-  error: ''
+  error: '',
+  loading: false
 };
 
 Trains.propTypes = {
   trains: PropTypes.arrayOf(PropTypes.object),
   getTrainsList: PropTypes.func.isRequired,
   handleClick: PropTypes.func.isRequired,
-  error: PropTypes.string
+  error: PropTypes.string,
+  loading: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
   trains: state.trainsReducer.services,
-  error: state.error
+  error: state.trainsReducer.error,
+  loading: state.trainsReducer.loading
 });
 
 const mapDispatchToProps = dispatch => ({
