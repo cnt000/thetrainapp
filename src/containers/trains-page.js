@@ -5,6 +5,9 @@ import format from 'date-fns/format';
 import shortid from 'short-id';
 import { getTrains, getTrainsDetails } from '../actions/trains';
 import Train from '../components/train';
+import Error from '../components/error';
+import Loader from '../components/loader';
+import NoResults from '../components/no-results';
 
 const proxyUrl = `http://localhost:3000/proxy?url=`;
 const trainsUrl = `https://realtime.thetrainline.com/departures/wat`;
@@ -23,12 +26,9 @@ class Trains extends React.Component {
     const { trains, error, loading } = this.props;
     return (
       <div>
-        {error && <span className="error">Error: {error}</span>}
-        <p>{loading && <span> Is loading... </span>}</p>
-        {!loading &&
-          trains.length === 0 && (
-            <span className="no-results">No results, please try again...</span>
-          )}
+        <Error error={error} />
+        <Loader isLoading={loading} />
+        <NoResults isLoading={loading} len={trains.length} />
         <ul>
           {trains
             .filter(train => train.transportMode === 'TRAIN')

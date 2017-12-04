@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import shortid from 'short-id';
 import format from 'date-fns/format';
 import { getTrainsDetails } from '../actions/trains';
+import Error from '../components/error';
+import Loader from '../components/loader';
 
 const proxyUrl = `http://localhost:3000/proxy?url=`;
 const trainsUrl = `https://realtime.thetrainline.com/callingPattern/`;
@@ -27,8 +29,8 @@ class TrainStops extends React.Component {
         <Link to="/" href="/">
           Back
         </Link>
-        {error && <div>ERROR: {error}</div>}
-        {loading && <p> Is loading... </p>}
+        <Error error={error} />
+        <Loader isLoading={loading} />
         {!loading && <p>{activeTrain.serviceUid}</p>}
         <ul>
           {!loading &&
