@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import format from 'date-fns/format';
 import shortid from 'short-id';
+import styled from 'styled-components';
 import { getTrains, getTrainsDetails } from '../actions/trains';
 import Train from '../components/train';
 import Error from '../components/error';
@@ -11,6 +12,15 @@ import NoResults from '../components/no-results';
 
 const proxyUrl = `http://localhost:3000/proxy?url=`;
 const trainsUrl = `https://realtime.thetrainline.com/departures/wat`;
+
+const Div = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  @media (min-width: 769px) {
+    width: 330px;
+    margin-top: 8px;
+  }
+`;
 
 class Trains extends React.Component {
   componentDidMount() {
@@ -25,7 +35,7 @@ class Trains extends React.Component {
   render() {
     const { trains, error, loading } = this.props;
     return (
-      <div>
+      <Div>
         <Error error={error} />
         <Loader isLoading={loading} />
         <NoResults isLoading={loading} len={trains.length} />
@@ -41,7 +51,7 @@ class Trains extends React.Component {
               />
             ))}
         </ul>
-      </div>
+      </Div>
     );
   }
 }

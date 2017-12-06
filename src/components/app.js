@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import 'normalize-css';
 import TrainsPage from '../containers/trains-page';
 import TrainStops from '../containers/train-stops';
+import './app.scss';
 
 const App = () => (
   <Router>
