@@ -2,11 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import shortid from 'short-id';
-import format from 'date-fns/format';
 import { getTrainsDetails } from '../actions/trains';
 import Error from '../components/error';
 import Loader from '../components/loader';
+import Stop from '../components/stop';
 
 const proxyUrl = `http://localhost:3000/proxy?url=`;
 const trainsUrl = `https://realtime.thetrainline.com/callingPattern/`;
@@ -36,24 +35,7 @@ class TrainStops extends React.Component {
           {!loading &&
             activeTrain.stops &&
             activeTrain.stops.map(
-              stop =>
-                stop.departure.scheduled && (
-                  <li
-                    key={`stops_${shortid.generate()}`}
-                    className="calling-point"
-                  >
-                    <div className="calling-point-time">
-                      {stop.departure.scheduled &&
-                        format(stop.departure.scheduled.scheduledTime, 'HH:mm')}
-                    </div>
-                    <div className="calling-point-station-container">
-                      <div className="calling-point-station">
-                        Stoke-on-Trent
-                      </div>
-                      <div className="calling-point-due">?On time</div>
-                    </div>
-                  </li>
-                )
+              stop => stop.departure.scheduled && <Stop stop={stop} />
             )}
         </ul>
       </nav>

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import 'normalize-css';
 import TrainsPage from '../containers/trains-page';
-import TrainStops from '../containers/train-page';
+import TrainStops from '../containers/train-stops';
 
 const App = () => (
   <Router>
