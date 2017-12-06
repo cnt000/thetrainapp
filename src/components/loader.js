@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
 const Loader = ({ isLoading }) =>
-  isLoading && <p>{isLoading && <span> Is loading... </span>}</p>;
+  isLoading && <p>{isLoading && <span> Is loading... </span>}</p>
 
-export default Loader;
+export default Loader

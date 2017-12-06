@@ -1,6 +1,6 @@
-const path = require('path');
+const path = require('path')
 
-const parentDir = path.join(__dirname, '../');
+const parentDir = path.join(__dirname, '../')
 
 module.exports = {
   entry: [path.join(parentDir, 'index.js')],
@@ -31,4 +31,4 @@ module.exports = {
     contentBase: parentDir,
     historyApiFallback: true
   }
-};
+}

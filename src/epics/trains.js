@@ -1,19 +1,19 @@
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import { Observable } from 'rxjs/Observable';
-import { ajax } from 'rxjs/observable/dom/ajax';
+import 'rxjs/add/operator/switchMap'
+import 'rxjs/add/operator/mergeMap'
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/catch'
+import { Observable } from 'rxjs/Observable'
+import { ajax } from 'rxjs/observable/dom/ajax'
 import {
   fetchTrainsFulfilled,
   fetchTrainDetailsFulfilled
-} from '../actions/trains';
+} from '../actions/trains'
 import {
   LOAD_TRAINS_REQUEST,
   LOAD_TRAINS_FAIL,
   LOAD_TRAIN_DETAILS_REQUEST,
   LOAD_TRAIN_DETAILS_FAIL
-} from '../types/trains';
+} from '../types/trains'
 
 export function loadTrainsList(action$) {
   return action$
@@ -30,7 +30,7 @@ export function loadTrainsList(action$) {
             error: true
           })
         )
-    );
+    )
 }
 
 export function loadTrainDetails(action$) {
@@ -48,5 +48,5 @@ export function loadTrainDetails(action$) {
             error: true
           })
         )
-    );
+    )
 }

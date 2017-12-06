@@ -1,9 +1,9 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import format from 'date-fns/format';
-import styled from 'styled-components';
+import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import format from 'date-fns/format'
+import styled from 'styled-components'
 
 const Li = styled.li`
   background: white;
@@ -16,28 +16,28 @@ const Li = styled.li`
   &:hover {
     background-color: rgb(209, 244, 236);
   }
-`;
+`
 
 const ServiceStation = styled.div`
   display: flex;
   justify-content: space-between;
-`;
+`
 
 const SideInfo = styled.div`
   display: inline-block;
   width: 25%;
-`;
+`
 
 const IconBox = styled.div`
   display: inline-block;
   width: 15%;
   text-align: right;
-`;
+`
 
 const CenterInfo = styled.div`
   display: inline-block;
   width: 60%;
-`;
+`
 
 const Train = ({ data, day }) => (
   <Li>
@@ -63,16 +63,16 @@ const Train = ({ data, day }) => (
       </ServiceStation>
     </Link>
   </Li>
-);
+)
 
 Train.propTypes = {
   data: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   day: PropTypes.string
-};
+}
 
 Train.defaultProps = {
   data: {},
   day: ''
-};
+}
 
-export default connect(state => state)(Train);
+export default connect(state => state)(Train)

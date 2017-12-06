@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
 const Error = ({ error }) =>
-  error && <span className="error">Error: {error}</span>;
+  error && <span className="error">Error: {error}</span>
 
-export default Error;
+export default Error

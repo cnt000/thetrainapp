@@ -1,9 +1,9 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { storiesOf } from '@storybook/react';
-import { Router, Route, Link } from 'react-router-dom';
-import TrainStops from './trains-page';
-import store from '../store';
+import React from 'react'
+import { Provider } from 'react-redux'
+import { storiesOf } from '@storybook/react'
+import { Router, Route, Link } from 'react-router-dom'
+import TrainStops from './trains-page'
+import store from '../store'
 
 storiesOf('TrainStops Container', module).add('TrainStops', () => (
   <Provider store={store}>
@@ -16,4 +16,4 @@ storiesOf('TrainStops Container', module).add('TrainStops', () => (
       </div>
     </Router>
   </Provider>
-));
+))
