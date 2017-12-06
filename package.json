@@ -32,6 +32,7 @@
     "rxjs": "^5.5.2",
     "short-id": "0.1.0-1",
     "styled-components": "^2.2.4",
+    "webfontloader": "^1.6.28",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.4"
   },

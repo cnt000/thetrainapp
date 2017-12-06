@@ -1,9 +1,16 @@
+$lightGrey: #d4d4d4;
+$black: #000;
+
 body {
-  background-color: #d4d4d4; 
+  background-color: $lightGrey; 
+}
+
+a {
+  display: block;
 }
 
 a, a:link, a:visited {
-  color: black;
+  color: $black;
   text-decoration: none;
 }
 

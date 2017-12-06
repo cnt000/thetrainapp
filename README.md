@@ -3,5 +3,7 @@
 test
 loader
 icona
-styled component 
+deploy heroku?
+vue
+
 calcolo se ontime?

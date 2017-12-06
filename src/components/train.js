@@ -8,12 +8,11 @@ import styled from 'styled-components';
 const Li = styled.li`
   background: white;
   color: 'black';
+  cursor: pointer;
   font-size: 1em;
-  padding-bottom: 14px;
-  padding-left: 15px;
-  padding-right: 35px;
-  padding-top: 14px;
+  padding: 14px 14px;
   border-bottom: 1px solid #eeeeee;
+  font-family: 'Cabin';
   &:hover {
     background-color: rgb(209, 244, 236);
   }
@@ -24,31 +23,44 @@ const ServiceStation = styled.div`
   justify-content: space-between;
 `;
 
-const ServiceDetails = styled.div`
-  display: flex;
-  justify-content: space-between;
+const SideInfo = styled.div`
+  display: inline-block;
+  width: 25%;
+`;
+
+const IconBox = styled.div`
+  display: inline-block;
+  width: 15%;
+  text-align: right;
+`;
+
+const CenterInfo = styled.div`
+  display: inline-block;
+  width: 60%;
 `;
 
 const Train = ({ data, day }) => (
   <Li>
     <Link to={`/train/${data.serviceIdentifier}/${day}`} href="/">
       <ServiceStation>
-        <span className="scheduled-time">
-          {format(data.scheduledInfo.scheduledTime, 'HH:mm')}
-        </span>
-        <span className="destination">{data.destinationList[0].crs}</span>
-        <span className="platform">
-          <abbr title="Platform">Plat. </abbr>
-          {data.scheduledInfo.scheduledPlatform}
-        </span>
+        <SideInfo>{format(data.scheduledInfo.scheduledTime, 'HH:mm')}</SideInfo>
+        <CenterInfo>
+          <ServiceStation>
+            <span>{data.destinationList[0].crs}</span>
+            <span>
+              <abbr title="Platform">Plat. </abbr>
+              {data.scheduledInfo.scheduledPlatform}
+            </span>
+          </ServiceStation>
+          <ServiceStation>
+            <span>
+              {data.serviceIdentifier}-{data.serviceOperator}
+            </span>
+            <span>On Time</span>
+          </ServiceStation>
+        </CenterInfo>
+        <IconBox> &gt; </IconBox>
       </ServiceStation>
-      <ServiceDetails>
-        <span className="operator">
-          {data.serviceIdentifier}-{data.serviceOperator}
-        </span>
-        <span className="expected ontime">On Time</span>
-      </ServiceDetails>
-      <i className="icon icon-chevron-right" />
     </Link>
   </Li>
 );
