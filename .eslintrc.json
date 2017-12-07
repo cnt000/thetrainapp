@@ -2,7 +2,8 @@
   "extends": ["airbnb", "prettier"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "semi": ["error", "never"]
+    "semi": ["error", "never"],
+    "linebreak-style": ["error", "unix"]
   },
   "env": {
     "browser": true,
