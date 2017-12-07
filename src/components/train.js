@@ -23,9 +23,11 @@ const ServiceStation = styled.div`
   justify-content: space-between;
 `
 
-const SideInfo = styled.div`
+const TimeInfo = styled.div`
   display: inline-block;
   width: 25%;
+  font-size: 18px;
+  font-weight: bold;
 `
 
 const IconBox = styled.div`
@@ -43,7 +45,7 @@ const Train = ({ data, day }) => (
   <Li>
     <Link to={`/train/${data.serviceIdentifier}/${day}`} href="/">
       <ServiceStation>
-        <SideInfo>{format(data.scheduledInfo.scheduledTime, 'HH:mm')}</SideInfo>
+        <TimeInfo>{format(data.scheduledInfo.scheduledTime, 'HH:mm')}</TimeInfo>
         <CenterInfo>
           <ServiceStation>
             <span>{data.destinationList[0].crs}</span>
