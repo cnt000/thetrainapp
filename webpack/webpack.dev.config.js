@@ -18,10 +18,6 @@ module.exports = {
         loader: 'eslint-loader'
       },
       {
-        test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader']
-      },
-      {
         test: /\.svg$/,
         loaders: ['svg-react-loader']
       }

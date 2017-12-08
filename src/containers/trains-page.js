@@ -1,8 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import format from 'date-fns/format'
 import shortid from 'short-id'
+import styled from 'styled-components'
 import { getTrains, getTrainsDetails } from '../actions/trains'
 import ListContainer from '../components/list-container'
 import Train from '../components/train'
@@ -12,6 +14,19 @@ import NoResults from '../components/no-results'
 
 const proxyUrl = `http://localhost:3000/proxy?url=`
 const trainsUrl = `https://realtime.thetrainline.com/departures/wat`
+
+const TrainLi = styled.li`
+  background: white;
+  color: 'black';
+  cursor: pointer;
+  font-size: 1em;
+  padding: 14px 14px;
+  border-bottom: 1px solid #eeeeee;
+  font-family: 'Cabin';
+  &:hover {
+    background-color: rgb(209, 244, 236);
+  }
+`
 
 class Trains extends React.Component {
   componentDidMount() {
@@ -34,12 +49,14 @@ class Trains extends React.Component {
           {trains
             .filter(train => train.transportMode === 'TRAIN')
             .map(train => (
-              <Train
-                key={`train_${shortid.generate()}`}
-                data={train}
-                day={this.getToday()}
-                onClick={this.props.handleClick}
-              />
+              <TrainLi key={`train_${shortid.generate()}`}>
+                <Link
+                  to={`/train/${train.serviceIdentifier}/${this.getToday()}`}
+                  href="/"
+                >
+                  <Train data={train} onClick={this.props.handleClick} />
+                </Link>
+              </TrainLi>
             ))}
         </ul>
       </ListContainer>

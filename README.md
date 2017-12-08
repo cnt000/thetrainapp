@@ -5,8 +5,8 @@ test
 fare la build
 deploy heroku?
 
-stili stops
+togliere sass-loader mettere injectGlobal
+extract components
 animazione stops?
-
 
 vue
