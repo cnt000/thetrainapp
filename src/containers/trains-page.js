@@ -29,7 +29,7 @@ class Trains extends React.Component {
       <ListContainer>
         <Error error={error} />
         <Loader isLoading={loading} />
-        <NoResults isLoading={loading} len={trains.length} />
+        <NoResults isLoading={loading} len={trains.length} error={error} />
         <ul>
           {trains
             .filter(train => train.transportMode === 'TRAIN')

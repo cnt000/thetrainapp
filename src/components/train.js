@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import format from 'date-fns/format'
+import compareAsc from 'date-fns/compare_asc'
 import styled from 'styled-components'
+import arrowRight from '../images/arrow-right.svg'
 
 const Li = styled.li`
   background: white;
@@ -34,6 +36,7 @@ const IconBox = styled.div`
   display: inline-block;
   width: 15%;
   text-align: right;
+  font-size: 24px;
 `
 
 const CenterInfo = styled.div`
@@ -58,10 +61,24 @@ const Train = ({ data, day }) => (
             <span>
               {data.serviceIdentifier}-{data.serviceOperator}
             </span>
-            <span>On Time</span>
+            <span>
+              {data.realTimeUpdatesInfo &&
+              compareAsc(
+                data.scheduledInfo.scheduledTime,
+                data.realTimeUpdatesInfo.realTimeServiceInfo.realTime
+              ) === -1
+                ? `Late ${format(
+                    data.realTimeUpdatesInfo.realTimeServiceInfo.realTime,
+                    'HH:mm'
+                  )}`
+                : `On Time`}
+            </span>
           </ServiceStation>
         </CenterInfo>
-        <IconBox> &gt; </IconBox>
+        <IconBox>
+          {' '}
+          <img src={arrowRight} alt="" />{' '}
+        </IconBox>
       </ServiceStation>
     </Link>
   </Li>

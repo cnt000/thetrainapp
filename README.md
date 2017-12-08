@@ -2,12 +2,10 @@
 
 test
 
-loader
 icona
-stili
+stili stops
+animazione stops?
 
 deploy heroku?
 
 vue
-
-calcolo se ontime?
