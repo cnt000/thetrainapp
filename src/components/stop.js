@@ -11,17 +11,17 @@ const Li = styled.li`
   font-family: 'Cabin';
   font-size: 1em;
   text-align: center;
-  height: 90px;
+  height: 80px;
 `
 
 const StopFlag = styled.div`
   position: absolute;
+  background: ${props => (props.realTime === 'Actual' ? 'green' : 'yellow')};
   top: 50%;
   left: 50%;
   display: inline-block;
   border-radius: 45px;
   border: 1px solid #999999;
-  background-color: #ffffff;
   width: 12px;
   height: 12px;
   margin-left: -7px;
@@ -68,7 +68,9 @@ const Stop = ({ stop, isFirst, isLast }) => (
         {stop.departure.scheduled &&
           format(stop.departure.scheduled.scheduledTime, 'HH:mm')}
       </Time>
-      <StopFlag />
+      <StopFlag
+        realTime={stop.departure.realTime.realTimeServiceInfo.realTimeFlag}
+      />
       <Line isFirst={isFirst} isLast={isLast} />
       <Station>
         <div className="calling-point-station">{stop.location.crs}</div>

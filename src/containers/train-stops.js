@@ -14,9 +14,10 @@ const proxyUrl = `http://localhost:3000/proxy?url=`
 const trainsUrl = `https://realtime.thetrainline.com/callingPattern/`
 
 const Div = styled.div`
-  backgorund: #ffffff;
+  background: #ffffff;
   text-align: center;
   font-size: 20px;
+  padding-top: 12px;
 `
 
 class TrainStops extends React.Component {
