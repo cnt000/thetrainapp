@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import shortid from 'short-id'
+import styled from 'styled-components'
 import { getTrainsDetails } from '../actions/trains'
 import ListContainer from '../components/list-container'
 import Error from '../components/error'
@@ -11,6 +12,12 @@ import Stop from '../components/stop'
 
 const proxyUrl = `http://localhost:3000/proxy?url=`
 const trainsUrl = `https://realtime.thetrainline.com/callingPattern/`
+
+const Div = styled.div`
+  backgorund: #ffffff;
+  text-align: center;
+  font-size: 20px;
+`
 
 class TrainStops extends React.Component {
   componentDidMount() {
@@ -25,6 +32,7 @@ class TrainStops extends React.Component {
 
   render() {
     const { activeTrain, error, loading } = this.props
+    const listLen = activeTrain.stops ? activeTrain.stops.length : 0
     return (
       <ListContainer>
         <Link to="/" href="/">
@@ -32,14 +40,25 @@ class TrainStops extends React.Component {
         </Link>
         <Error error={error} />
         <Loader isLoading={loading} />
-        {!loading && <p>{activeTrain.serviceUid}</p>}
+        {!loading && (
+          <Div>
+            {activeTrain.serviceOrigins && activeTrain.serviceOrigins[0]} to{' '}
+            {activeTrain.serviceDestinations &&
+              activeTrain.serviceDestinations[0]}
+          </Div>
+        )}
         <ul>
           {!loading &&
             activeTrain.stops &&
             activeTrain.stops.map(
-              stop =>
+              (stop, index) =>
                 stop.departure.scheduled && (
-                  <Stop key={`stops_${shortid.generate()}`} stop={stop} />
+                  <Stop
+                    key={`stops_${shortid.generate()}`}
+                    stop={stop}
+                    isFirst={index === 0}
+                    isLast={index === listLen - 2}
+                  />
                 )
             )}
         </ul>
