@@ -2,10 +2,11 @@
 
 test
 
-icona
+fare la build
+deploy heroku?
+
 stili stops
 animazione stops?
 
-deploy heroku?
 
 vue

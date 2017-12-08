@@ -17,10 +17,9 @@ const StopFlag = styled.div`
   position: relative;
   display: inline-block;
   border-radius: 45px;
-  background-color: lightgreen;
-  border: 1px solid black;
-  width: 30px;
-  height: 30px;
+  border: 1px solid #999999;
+  width: 12px;
+  height: 12px;
   z-index: 1;
 `
 
@@ -37,10 +36,10 @@ const Line = styled.div`
 const Stop = ({ stop }) => (
   <Li>
     <div className="calling-point-time">
-      <StopFlag />
-      <Line />
       {stop.departure.scheduled &&
         format(stop.departure.scheduled.scheduledTime, 'HH:mm')}
+      <StopFlag />
+      <Line />
       <div className="calling-point-station-container">
         <div className="calling-point-station">Stoke-on-Trent</div>
         <div className="calling-point-due">?On time</div>
