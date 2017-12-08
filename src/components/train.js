@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom'
 import format from 'date-fns/format'
 import compareAsc from 'date-fns/compare_asc'
 import styled from 'styled-components'
-import arrowRight from '../images/arrow-right.svg'
+import ArrowRight from '../images/arrow-right.svg'
 
-const Li = styled.li`
+const TrainLi = styled.li`
   background: white;
   color: 'black';
   cursor: pointer;
@@ -20,7 +20,7 @@ const Li = styled.li`
   }
 `
 
-const ServiceStation = styled.div`
+const TrainStation = styled.div`
   display: flex;
   justify-content: space-between;
 `
@@ -33,7 +33,9 @@ const TimeInfo = styled.div`
 `
 
 const IconBox = styled.div`
-  display: inline-block;
+  display: flex;
+  align-self: center;
+  justify-content: flex-end;
   width: 15%;
   text-align: right;
   font-size: 24px;
@@ -45,19 +47,19 @@ const CenterInfo = styled.div`
 `
 
 const Train = ({ data, day }) => (
-  <Li>
+  <TrainLi>
     <Link to={`/train/${data.serviceIdentifier}/${day}`} href="/">
-      <ServiceStation>
+      <TrainStation>
         <TimeInfo>{format(data.scheduledInfo.scheduledTime, 'HH:mm')}</TimeInfo>
         <CenterInfo>
-          <ServiceStation>
+          <TrainStation>
             <span>{data.destinationList[0].crs}</span>
             <span>
               <abbr title="Platform">Plat. </abbr>
               {data.scheduledInfo.scheduledPlatform}
             </span>
-          </ServiceStation>
-          <ServiceStation>
+          </TrainStation>
+          <TrainStation>
             <span>
               {data.serviceIdentifier}-{data.serviceOperator}
             </span>
@@ -73,15 +75,14 @@ const Train = ({ data, day }) => (
                   )}`
                 : `On Time`}
             </span>
-          </ServiceStation>
+          </TrainStation>
         </CenterInfo>
         <IconBox>
-          {' '}
-          <img src={arrowRight} alt="" />{' '}
+          <ArrowRight width={20} height={20} />
         </IconBox>
-      </ServiceStation>
+      </TrainStation>
     </Link>
-  </Li>
+  </TrainLi>
 )
 
 Train.propTypes = {
