@@ -69,7 +69,10 @@ const Stop = ({ stop, isFirst, isLast }) => (
           format(stop.departure.scheduled.scheduledTime, 'HH:mm')}
       </Time>
       <StopFlag
-        realTime={stop.departure.realTime.realTimeServiceInfo.realTimeFlag}
+        realTime={
+          stop.departure.realTime &&
+          stop.departure.realTime.realTimeServiceInfo.realTimeFlag
+        }
       />
       <Line isFirst={isFirst} isLast={isLast} />
       <Station>

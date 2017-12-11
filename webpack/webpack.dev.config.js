@@ -24,11 +24,11 @@ module.exports = {
     ]
   },
   output: {
-    path: `${parentDir}/dist`,
+    path: `${parentDir}/public/dist`,
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: parentDir,
+    contentBase: `${parentDir}/public`,
     historyApiFallback: true
   }
 }

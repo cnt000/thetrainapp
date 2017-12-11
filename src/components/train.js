@@ -47,7 +47,7 @@ const Train = ({ data }) => (
           {data.serviceIdentifier}-{data.serviceOperator}
         </span>
         <span>
-          {data.realTimeUpdatesInfo &&
+          {data.realTimeUpdatesInfo && data.realTimeUpdatesInfo.realTimeServiceInfo &&
           compareAsc(
             data.scheduledInfo.scheduledTime,
             data.realTimeUpdatesInfo.realTimeServiceInfo.realTime

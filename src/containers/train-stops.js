@@ -33,15 +33,17 @@ const TrainBookmark = styled.div`
 `
 
 function countStopStations(train) {
-  return train.stops
-    .map(s => s.departure.realTime || {})
-    .reduce(
-      (acc, curr) =>
-        curr.realTimeServiceInfo && curr.realTimeServiceInfo.hasDeparted
-          ? acc + 1
-          : acc,
-      0
-    )
+  return train && train.stops
+    ? train.stops
+        .map(s => s.departure.realTime || {})
+        .reduce(
+          (acc, curr) =>
+            curr.realTimeServiceInfo && curr.realTimeServiceInfo.hasDeparted
+              ? acc + 1
+              : acc,
+          1
+        )
+    : 1
 }
 
 class TrainStops extends React.Component {

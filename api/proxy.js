@@ -1,7 +1,9 @@
 const express = require('express')
 const apiProxy = require('express-api-proxy')
+var bodyParser = require('body-parser')
 
 const app = express()
+app.use(bodyParser.json())
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
@@ -12,6 +14,8 @@ app.use((req, res, next) => {
   )
   next()
 })
+
+app.use('/', express.static('public'))
 
 app.get(
   '/proxy',
@@ -27,4 +31,4 @@ app.get(
 )
 const port = process.env.PORT || 3000
 
-app.listen(port, () => console.log('API proxy istening on port 3000!'))
+app.listen(port, () => console.log('API proxy listening on port 3000!'))
