@@ -20,6 +20,30 @@ const Div = styled.div`
   padding-top: 12px;
 `
 
+const TrainBookmark = styled.div`
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  position: absolute;
+  top: ${props => props.realtTimeStopsNum * 100}px;
+  left: 50%;
+  margin-left: -12px;
+  background-color: blue;
+  z-index: 2;
+`
+
+function countStopStations(train) {
+  return train.stops
+    .map(s => s.departure.realTime || {})
+    .reduce(
+      (acc, curr) =>
+        curr.realTimeServiceInfo && curr.realTimeServiceInfo.hasDeparted
+          ? acc + 1
+          : acc,
+      0
+    )
+}
+
 class TrainStops extends React.Component {
   componentDidMount() {
     if (!this.props.activeTrain.url) {
@@ -32,7 +56,7 @@ class TrainStops extends React.Component {
   }
 
   render() {
-    const { activeTrain, error, loading } = this.props
+    const { activeTrain, error, loading, realtTimeStopsNum } = this.props
     const listLen = activeTrain.stops ? activeTrain.stops.length : 0
     return (
       <ListContainer>
@@ -48,6 +72,7 @@ class TrainStops extends React.Component {
               activeTrain.serviceDestinations[0]}
           </Div>
         )}
+        <TrainBookmark realtTimeStopsNum={realtTimeStopsNum} />
         <ul>
           {!loading &&
             activeTrain.stops &&
@@ -70,7 +95,8 @@ class TrainStops extends React.Component {
 
 const mapStateToProps = state => ({
   activeTrain: state.trainsReducer.activeTrain,
-  loading: state.trainsReducer.loading
+  loading: state.trainsReducer.loading,
+  realtTimeStopsNum: countStopStations(state.trainsReducer.activeTrain)
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -86,7 +112,8 @@ TrainStops.propTypes = {
   match: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.object])
   ),
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  realtTimeStopsNum: PropTypes.number
 }
 
 TrainStops.defaultProps = {
@@ -94,7 +121,8 @@ TrainStops.defaultProps = {
   getTrainsDetails: () => {},
   error: '',
   match: { params: PropTypes.string },
-  loading: false
+  loading: false,
+  realtTimeStopsNum: 0
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrainStops)
