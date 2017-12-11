@@ -10,7 +10,7 @@
     "build": "./node_modules/.bin/webpack -p",
     "format": "./node_modules/.bin/prettier --write '**/*.js'",
     "lint": "./node_modules/.bin/eslint './**/*.js' --quiet",
-    "proxy": "node ./api/proxy.js"
+    "start": "node ./api/proxy.js"
   },
   "author": "Edoardo Gargano",
   "license": "ISC",
