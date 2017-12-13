@@ -10,7 +10,7 @@ import Error from '../components/error'
 import Loader from '../components/loader'
 import Stop from '../components/stop'
 
-const proxyUrl = `http://localhost:3000/proxy?url=`
+const proxyUrl = `/proxy?url=`
 const trainsUrl = `https://realtime.thetrainline.com/callingPattern/`
 
 const Div = styled.div`

@@ -12,7 +12,7 @@ import Error from '../components/error'
 import Loader from '../components/loader'
 import NoResults from '../components/no-results'
 
-const proxyUrl = `http://localhost:3000/proxy?url=`
+const proxyUrl = `/proxy?url=`
 const trainsUrl = `https://realtime.thetrainline.com/departures/wat`
 
 const TrainLi = styled.li`
