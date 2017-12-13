@@ -23,6 +23,12 @@ module.exports = merge(common, {
   },
   devServer: {
     contentBase: `${common.parentDir}/public`,
+    proxy: {
+      '/proxy': {
+        target: 'http://localhost:3000/',
+        secure: false
+      }
+    },
     historyApiFallback: true
   }
 })
