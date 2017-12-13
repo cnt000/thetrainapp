@@ -2,7 +2,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { storiesOf } from '@storybook/react'
 import WebFont from 'webfontloader'
-import App from './app'
+import App from '../components/app'
 import store from '../store'
 
 WebFont.load({

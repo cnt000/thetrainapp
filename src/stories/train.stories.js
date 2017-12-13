@@ -1,8 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import { BrowserRouter as Router } from 'react-router-dom'
-import Train from './train'
+import Train from '../components/train'
 
 const mock = {
   serviceIdentifier: 'W35422',

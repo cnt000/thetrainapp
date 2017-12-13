@@ -1,6 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import Stop from './stop'
+import Stop from '../components/stop'
 
 const mockStop = {
   location: {

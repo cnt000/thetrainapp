@@ -1,6 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import NoResults from './no-results'
+import NoResults from '../components/no-results'
 
 storiesOf('NoResults Box', module)
   .add('with No results', () => (

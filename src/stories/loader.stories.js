@@ -1,6 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import Loader from './loader'
+import Loader from '../components/loader'
 
 storiesOf('Loader', module)
   .add('Loader is Loading', () => <Loader isLoading />)
