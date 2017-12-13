@@ -1,6 +1,6 @@
 const express = require('express')
 const apiProxy = require('express-api-proxy')
-var bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 
 const app = express()
 app.use(bodyParser.json())
@@ -15,7 +15,7 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use('/', express.static('public'))
+app.use('/', express.static('dist'))
 
 app.get(
   '/proxy',

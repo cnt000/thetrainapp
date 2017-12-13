@@ -1,10 +1,8 @@
-const path = require('path')
+const merge = require('webpack-merge')
+const common = require('./webpack.common.js')
 
-const parentDir = path.join(__dirname, '../')
-
-module.exports = {
-  entry: [path.join(parentDir, 'index.js')],
-  devtool: 'source-map',
+module.exports = merge(common, {
+  devtool: 'inline-source-map',
   module: {
     loaders: [
       {
@@ -23,12 +21,8 @@ module.exports = {
       }
     ]
   },
-  output: {
-    path: `${parentDir}/public/dist`,
-    filename: 'bundle.js'
-  },
   devServer: {
-    contentBase: `${parentDir}/public`,
+    contentBase: `${common.parentDir}/public`,
     historyApiFallback: true
   }
-}
+})
