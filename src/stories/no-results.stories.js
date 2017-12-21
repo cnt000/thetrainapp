@@ -7,11 +7,9 @@ storiesOf('NoResults Box', module)
     <NoResults isLoading={false} len={0} error="" />
   ))
   .add('with results (empty)', () => (
-    <NoResults isLoading={false} len={1} erorr="" />
+    <NoResults isLoading={false} len={1} error="" />
   ))
   .add('with error (empty)', () => (
-    <NoResults isLoading={false} len={1} erorr="Error occurred" />
+    <NoResults isLoading={false} len={1} error="Error occurred" />
   ))
-  .add('isLoading true (empty)', () => (
-    <NoResults isLoading={true} len={1} erorr="" />
-  ))
+  .add('isLoading true (empty)', () => <NoResults isLoading len={1} error="" />)
