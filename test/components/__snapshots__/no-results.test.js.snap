@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoResults has a valid snapshot 1`] = `
+<span
+  className="no-results"
+>
+  No results, please try again...
+</span>
+`;

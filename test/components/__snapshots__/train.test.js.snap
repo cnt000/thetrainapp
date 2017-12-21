@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Train has a valid snapshot 1`] = `
+<div
+  className="sc-bdVaJa hPftyW"
+>
+  <div
+    className="sc-bwzfXH fqjkKR"
+  >
+    21:39
+  </div>
+  <div
+    className="sc-bxivhb vwWGx"
+  >
+    <div
+      className="sc-bdVaJa hPftyW"
+    >
+      <span>
+        SNS
+      </span>
+      <span>
+        <abbr
+          title="Platform"
+        >
+          Plat. 
+        </abbr>
+        17
+      </span>
+    </div>
+    <div
+      className="sc-bdVaJa hPftyW"
+    >
+      <span>
+        W35422
+        -
+        SW
+      </span>
+      <span>
+        On Time
+      </span>
+    </div>
+  </div>
+  <div
+    className="sc-htpNat bMTwEo"
+  >
+    <test-file-stub
+      height={16}
+      width={16}
+    />
+  </div>
+</div>
+`;

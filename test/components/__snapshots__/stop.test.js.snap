@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Stop has a valid snapshot end station 1`] = `
+<li
+  className="sc-bdVaJa jIXPTc"
+>
+  <div
+    className="sc-ifAKCX hZphQU"
+  >
+    <div
+      className="sc-bxivhb kDOEdb"
+    >
+      23:36
+    </div>
+    <div
+      className="sc-bwzfXH PgDNZ"
+    />
+    <div
+      className="sc-htpNat hNGSJA"
+    />
+    <div
+      className="sc-EHOje exgsEF"
+    >
+      <div
+        className="calling-point-station"
+      >
+        WAT
+      </div>
+      <div
+        className="calling-point-due"
+      >
+        Late 23:37
+        <div
+          className="sc-bZQynM gaKPBw"
+        >
+          departed
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+`;
+
+exports[`Stop has a valid snapshot middle station 1`] = `
+<li
+  className="sc-bdVaJa jIXPTc"
+>
+  <div
+    className="sc-ifAKCX hZphQU"
+  >
+    <div
+      className="sc-bxivhb kDOEdb"
+    >
+      23:36
+    </div>
+    <div
+      className="sc-bwzfXH PgDNZ"
+    />
+    <div
+      className="sc-htpNat ipBCiG"
+    />
+    <div
+      className="sc-EHOje exgsEF"
+    >
+      <div
+        className="calling-point-station"
+      >
+        WAT
+      </div>
+      <div
+        className="calling-point-due"
+      >
+        Late 23:37
+        <div
+          className="sc-bZQynM gaKPBw"
+        >
+          departed
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+`;
+
+exports[`Stop has a valid snapshot start station 1`] = `
+<li
+  className="sc-bdVaJa jIXPTc"
+>
+  <div
+    className="sc-ifAKCX hZphQU"
+  >
+    <div
+      className="sc-bxivhb kDOEdb"
+    >
+      23:36
+    </div>
+    <div
+      className="sc-bwzfXH PgDNZ"
+    />
+    <div
+      className="sc-htpNat cWPbSB"
+    />
+    <div
+      className="sc-EHOje exgsEF"
+    >
+      <div
+        className="calling-point-station"
+      >
+        WAT
+      </div>
+      <div
+        className="calling-point-due"
+      >
+        Late 23:37
+        <div
+          className="sc-bZQynM gaKPBw"
+        >
+          departed
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+`;

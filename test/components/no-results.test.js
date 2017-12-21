@@ -20,14 +20,8 @@ describe('NoResults', () => {
 
   test('has a valid snapshot', () => {
     const component = renderer.create(
-      <NoResults len={1} error="Error occurred" />
+      <NoResults isLoading={false} len={0} error="" />
     )
-    const tree = component.toJSON()
-    expect(tree).toMatchSnapshot()
-  })
-
-  test('has a valid snapshot isLoading', () => {
-    const component = renderer.create(<NoResults isLoading len={1} error="" />)
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
   })
