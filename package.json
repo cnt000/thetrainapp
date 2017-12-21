@@ -14,6 +14,12 @@
   },
   "author": "Edoardo Gargano",
   "license": "ISC",
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+        "<rootDir>/test/fileMock.js"
+    }
+  },
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
@@ -26,7 +32,6 @@
     "clean-webpack-plugin": "^0.1.17",
     "compression-webpack-plugin": "^1.0.1",
     "date-fns": "^1.29.0",
-    "eslint": "^4.11.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-loader": "^1.9.0",
@@ -60,12 +65,15 @@
     "@storybook/addon-actions": "^3.2.17",
     "@storybook/react": "^3.2.16",
     "babel-jest": "^21.2.0",
+    "eslint": "^4.13.1",
+    "eslint-plugin-jest": "^21.5.0",
     "import-cost": "^1.2.3",
     "jest": "^21.2.1",
     "nock": "^9.1.3",
     "node-sass": "^4.7.2",
     "preload-webpack-plugin": "^2.0.0",
     "prettier": "^1.8.2",
+    "react-test-renderer": "^16.2.0",
     "sass": "^1.0.0-beta.3",
     "script-ext-html-webpack-plugin": "^1.8.8",
     "style-ext-html-webpack-plugin": "^3.4.5"

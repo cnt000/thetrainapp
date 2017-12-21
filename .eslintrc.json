@@ -5,8 +5,10 @@
     "semi": ["error", "never"],
     "linebreak-style": ["error", "unix"]
   },
+  "plugins": ["jest"],
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "jest/globals": true
   }
 }
