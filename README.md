@@ -2,8 +2,8 @@
 
 test
 
-fare la build
-deploy heroku?
+stile loader
+gestire errori
 
 animazione stops?
 
