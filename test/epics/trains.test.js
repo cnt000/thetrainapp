@@ -8,7 +8,6 @@ import {
 } from '../../src/types/trains'
 import { loadTrainsList, loadTrainDetails } from '../../src/epics/trains'
 import { getTrains } from '../../src/actions/trains'
-import mockData from '../mock_wat_call_light'
 
 const epicMiddleware = createEpicMiddleware(loadTrainsList)
 const mockStore = configureMockStore([epicMiddleware])
@@ -24,7 +23,7 @@ describe('loadTrainsList', () => {
 
   afterEach(() => {
     nock.cleanAll()
-    epicMiddleware.replaceEpic(loadTrainDetails)
+    // epicMiddleware.replaceEpic(loadTrainDetails)
   })
 
   it('produces get the trains list', () => {
