@@ -15,9 +15,9 @@ export const getTrainsDetails = action => ({
   action
 })
 
-export const fetchTrainsFulfilled = trains => ({
+export const fetchTrainsFulfilled = action => ({
   type: LOAD_TRAINS_SUCCESS,
-  trains
+  action
 })
 
 export const fetchTrainDetailsFulfilled = details => ({

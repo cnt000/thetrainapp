@@ -4,7 +4,6 @@ import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
 import 'rxjs/add/observable/of'
 import { Observable } from 'rxjs/Observable'
-import { ajax } from 'rxjs/observable/dom/ajax'
 import {
   fetchTrainsFulfilled,
   fetchTrainDetailsFulfilled
@@ -16,35 +15,32 @@ import {
   LOAD_TRAIN_DETAILS_FAIL
 } from '../types/trains'
 
-export function loadTrainsList(action$) {
-  return action$.ofType(LOAD_TRAINS_REQUEST).mergeMap(payload =>
-    ajax
-      .getJSON(`${payload.action}`)
-      .map(fetchTrainsFulfilled)
+export function loadTrainsList(action$, store, { trainsApi }) {
+  return action$.ofType(LOAD_TRAINS_REQUEST).switchMap(action =>
+    trainsApi
+      .fetchTrains(action)
+      .map(json => fetchTrainsFulfilled(json))
       .catch(error =>
         Observable.of({
           type: LOAD_TRAINS_FAIL,
-          payload: error.xhr.response,
+          payload: error,
           error: true
         })
       )
   )
 }
 
-export function loadTrainDetails(action$) {
-  return action$
-    .ofType(LOAD_TRAIN_DETAILS_REQUEST)
-    .map(action => action)
-    .switchMap(payload =>
-      ajax
-        .getJSON(`${payload.action}`)
-        .map(fetchTrainDetailsFulfilled)
-        .catch(error =>
-          Observable.of({
-            type: LOAD_TRAIN_DETAILS_FAIL,
-            payload: error.xhr.response,
-            error: true
-          })
-        )
-    )
+export function loadTrainDetails(action$, store, { trainsApi }) {
+  return action$.ofType(LOAD_TRAIN_DETAILS_REQUEST).switchMap(action =>
+    trainsApi
+      .fetchTrainDetails(action)
+      .map(json => fetchTrainDetailsFulfilled(json))
+      .catch(error =>
+        Observable.of({
+          type: LOAD_TRAIN_DETAILS_FAIL,
+          payload: error,
+          error: true
+        })
+      )
+  )
 }

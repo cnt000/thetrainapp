@@ -10,9 +10,17 @@ import {
 const trainsReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD_TRAINS_REQUEST:
-      return { ...state, loading: true, activeTrain: {} }
+      return {
+        ...state,
+        loading: true,
+        activeTrain: {}
+      }
     case LOAD_TRAINS_SUCCESS:
-      return { ...state, services: action.trains.services, loading: false }
+      return {
+        ...state,
+        services: action.action.services,
+        loading: false
+      }
     case LOAD_TRAINS_FAIL:
       return {
         ...state,
@@ -21,11 +29,22 @@ const trainsReducer = (state = {}, action) => {
         loading: false
       }
     case LOAD_TRAIN_DETAILS_REQUEST:
-      return { ...state, loading: true }
+      return {
+        ...state,
+        loading: true
+      }
     case LOAD_TRAIN_DETAILS_SUCCESS:
-      return { ...state, activeTrain: action.details.service, loading: false }
+      return {
+        ...state,
+        activeTrain: action.details.service,
+        loading: false
+      }
     case LOAD_TRAIN_DETAILS_FAIL:
-      return { ...state, error: 'error on train', loading: false }
+      return {
+        ...state,
+        error: 'error on train',
+        loading: false
+      }
     default:
       return state
   }

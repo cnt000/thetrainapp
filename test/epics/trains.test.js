@@ -1,60 +1,65 @@
-import nock from 'nock'
-import { createEpicMiddleware } from 'redux-observable'
-import configureMockStore from 'redux-mock-store'
-import { combineReducers } from 'redux'
-import {
-  LOAD_TRAINS_SUCCESS,
-  LOAD_TRAINS_REQUEST
-} from '../../src/types/trains'
+import { ActionsObservable } from 'redux-observable'
+import { Observable } from 'rxjs'
+import deepEqual from 'deep-equal'
 import { loadTrainsList, loadTrainDetails } from '../../src/epics/trains'
-import { getTrains } from '../../src/actions/trains'
+import {
+  LOAD_TRAINS_REQUEST,
+  LOAD_TRAIN_DETAILS_REQUEST
+} from '../../src/types/trains'
+import {
+  fetchTrainsFulfilled,
+  fetchTrainDetailsFulfilled
+} from '../../src/actions/trains'
 
-const epicMiddleware = createEpicMiddleware(loadTrainsList)
-const mockStore = configureMockStore([epicMiddleware])
-
-const proxyUrl = `http://localhost:3000`
-
-describe('loadTrainsList', () => {
-  let store
-
-  beforeEach(() => {
-    store = mockStore()
-  })
-
-  afterEach(() => {
-    nock.cleanAll()
-    // epicMiddleware.replaceEpic(loadTrainDetails)
-  })
-
-  it('produces get the trains list', () => {
-    const payload = {
-      ciao: 12345
-    }
-    nock(proxyUrl)
-      .get('/proxy')
-      .reply(200, {
-        ...payload
-      })
-
-    store.dispatch(
-      getTrains(
-        `${proxyUrl}/proxy?url=https://realtime.thetrainline.com/departures/wat`
-      )
-    )
-
-    const actions = store.getActions()
-
-    expect(actions).toEqual([
-      {
-        type: LOAD_TRAINS_REQUEST,
-        action: `${
-          proxyUrl
-        }/proxy?url=https://realtime.thetrainline.com/departures/wat`
-      },
-      {
-        type: LOAD_TRAINS_SUCCESS,
-        action: payload
+describe('load TrainsList', () => {
+  it('dispatches the correct action when it is successful', () => {
+    const action$ = ActionsObservable.of({
+      type: LOAD_TRAINS_REQUEST,
+      action: `http://localhost:3000/proxy`
+    })
+    const response = {
+      trains: {
+        services: []
       }
-    ])
+    }
+    const trainsApi = {
+      fetchTrains: () => Observable.of(response)
+    }
+
+    loadTrainsList(action$, null, {
+      trainsApi
+    })
+      .toArray()
+      .subscribe(actions => {
+        expect(deepEqual(actions, [fetchTrainsFulfilled(response)])).toBe(true)
+      })
+  })
+})
+
+describe('load TrainsDetails', () => {
+  it('dispatches the correct action when it is successful', () => {
+    const action$ = ActionsObservable.of({
+      type: LOAD_TRAIN_DETAILS_REQUEST,
+      action: `http://localhost:3000/proxy`
+    })
+    const action = {
+      details: {
+        trains: []
+      }
+    }
+    const trainsApi = {
+      fetchTrainDetails: () => Observable.of(action)
+    }
+
+    loadTrainDetails(action$, null, {
+      trainsApi
+    })
+      .toArray()
+      .subscribe(actions => {
+        console.log(actions)
+        expect(deepEqual(actions, [fetchTrainDetailsFulfilled(action)])).toBe(
+          true
+        )
+      })
   })
 })
