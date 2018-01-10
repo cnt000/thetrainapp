@@ -6,10 +6,10 @@
   "scripts": {
     "test": "jest --watch",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "format": "./node_modules/.bin/prettier --write '**/*.js'",
-    "lint": "./node_modules/.bin/eslint './**/*.js' --quiet",
+    "format": "prettier --write '**/*.js'",
+    "lint": "eslint './**/*.js' --quiet",
     "dev": "webpack-dev-server --open --config ./webpack/webpack.dev.js",
-    "build": "./node_modules/.bin/webpack --config ./webpack/webpack.prod.js",
+    "build": "webpack --config ./webpack/webpack.prod.js",
     "start": "npm run build && node ./api/proxy.js"
   },
   "author": "Edoardo Gargano",
@@ -19,7 +19,13 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/fileMock.js"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cnt0000/thetrainapp.git"
+  },
   "dependencies": {
+    "@storybook/addon-actions": "^3.2.17",
+    "@storybook/react": "^3.2.16",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -28,6 +34,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
+    "body-parser": "^1.18.2",
     "clean-webpack-plugin": "^0.1.17",
     "compression-webpack-plugin": "^1.0.1",
     "date-fns": "^1.29.0",
@@ -62,9 +69,8 @@
     "webpack-merge": "^4.1.1"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^3.2.17",
-    "@storybook/react": "^3.2.16",
     "babel-jest": "^21.2.0",
+    "deep-equal": "^1.0.1",
     "eslint": "^4.13.1",
     "eslint-plugin-jest": "^21.5.0",
     "import-cost": "^1.2.3",
