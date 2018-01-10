@@ -29,5 +29,5 @@ const mock = {
 }
 
 storiesOf('Train Story', module).add('Train', () => (
-  <Train data={mock} onClick={() => console.log('clicked')} />
+  <Train data={mock} onClick={() => action('clicked')} />
 ))
