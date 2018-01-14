@@ -14,10 +14,4 @@ describe('Loader', () => {
     div.innerHTML = 'This is and error'
     ReactDOM.render(<Loader isLoading={false} />, div)
   })
-
-  test('has a valid snapshot', () => {
-    const component = renderer.create(<Loader isLoading />)
-    const tree = component.toJSON()
-    expect(tree).toMatchSnapshot()
-  })
 })

@@ -27,7 +27,7 @@ describe('trains reducer', () => {
         {},
         {
           type: LOAD_TRAINS_SUCCESS,
-          trains: { services: [] }
+          action: { services: [] }
         }
       )
     ).toEqual({ services: [], loading: false })
